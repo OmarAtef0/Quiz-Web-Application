@@ -11,6 +11,33 @@ import Timer from "./Timer";
 import NextButton from "./NextButton";
 import PreButton from "./PreButton";
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function shuffleOptions(question) {
+  const options = question.options;
+  const correctOptionValue = question.options[question.correctOption];
+  console.log(options);
+  console.log(question.correctOption, " ", correctOptionValue);
+
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+
+  question.options = options;
+  question.correctOption = question.options.indexOf(correctOptionValue);
+
+  console.log(options);
+  console.log(question.correctOption, " ", correctOptionValue);
+  return question;
+}
+
 const intialState = {
   questions: [],
   answers: [],
@@ -32,6 +59,13 @@ function reducer(state, action) {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
+      let newQuestions = shuffleArray(state.questions);
+      console.log("NEW QUESTIONS ", newQuestions);
+
+      newQuestions.forEach((question, index) => {
+        newQuestions[index] = shuffleOptions(question);
+      });
+
       return {
         ...state,
         status: "active",
@@ -39,6 +73,7 @@ function reducer(state, action) {
         points: 0,
         secondsRemaining: state.questions.length * 20,
         answers: new Array(state.questions.length).fill(null),
+        questions: newQuestions,
       };
     case "newAnswer":
       const question = state.questions[state.index];
@@ -88,8 +123,6 @@ export default function App() {
           dispatch({ type: "dataReceived", payload: data.questions })
         )
         .catch((err) => dispatch({ type: "dataFailed" }));
-
-      console.log(questions);
     };
     executeWithDelay();
   }, []);
