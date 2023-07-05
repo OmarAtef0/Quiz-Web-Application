@@ -8,4 +8,4 @@
 
 <li>Start the development server:</li>
 <pre>npm start</pre>
-</ol> <p>This will open the Quiz Platform in your at <a href="http://localhost:3000">http://localhost:3000</a>.</p> <h2>Usage</h2> <p>To use the Quiz Platform, simply navigate to the application URL and follow the on-screen instructions. Users can select a quiz, answer questions, submit their responses, and view their scores.</p> </ol> <h2>License</h2> <p>The Quiz Platform is released under the [MIT License].</p> 
+</ol> <p>This will open the Quiz Platform at <a href="http://localhost:3000">http://localhost:3000</a>.</p> <h2>Usage</h2> <p>To use the Quiz Platform, simply navigate to the application URL and follow the on-screen instructions. Users can select a quiz, answer questions, submit their responses, and view their scores.</p> </ol> <h2>License</h2> <p>The Quiz Platform is released under the [MIT License].</p> 
